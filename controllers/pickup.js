@@ -14,7 +14,7 @@ exports.setPickupDate = async (req, res) => {
 
     const {serviceRecurrence, pickupDate } = req.body;
 
-   console.log(serviceRecurrence, pickupDate);
+   console.log({serviceRecurrence, pickupDate});
 
     const pickupDay = getDayOfWeek(pickupDate);
 
