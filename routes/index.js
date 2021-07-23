@@ -9,7 +9,7 @@ const {
   pickupSchema,
 } = require('../validations/pickup');
 
-router.post('/pickup', validateSchema(pickupSchema) ,pickUpController.setPickupDate);
+router.post('/', validateSchema(pickupSchema) ,pickUpController.setPickupDate);
 
 
 module.exports = router;

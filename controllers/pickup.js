@@ -1,5 +1,5 @@
 const express = require('express');
-
+const { successResMsg, errorResMsg } = require('../utils/response');
 
 function getDayOfWeek(date) {
   const dayOfWeek = new Date(date).getDay();    
@@ -14,7 +14,7 @@ exports.setPickupDate = async (req, res) => {
 
     const {serviceRecurrence, pickupDate } = req.body;
 
-  console.log(serviceRecurrence, pickupDate);
+   console.log(serviceRecurrence, pickupDate);
 
     const pickupDay = getDayOfWeek(pickupDate);
 
@@ -22,29 +22,18 @@ exports.setPickupDate = async (req, res) => {
 
 
   if (pickupDay === null) {
-    return res.status(400).json({
-      status: 'error',
-      message: 'Date Cannot be Null'
-    })
+    return errorResMsg(res, 'Date Cannot be Null');
   }
 
   // Accept pickup date (Mon - Fri)
   if (pickupDay !== 'Monday' && pickupDay !== 'Tuesday' && pickupDay !== 'Wednessday' && pickupDay !== 'Thursday' && pickupDay !== 'Friday') {
-    return res.status(400).json({
-      status: 'error',
-      message: 'Sorry, you can only pick up during Week days,: Monday - Friday'
-    })
+    return errorResMsg(res, 400, 'Sorry, you can only pick up during Week days,: Monday - Friday');
   }
 
 
-  return res.status(200).json({
-    status: 'success'
-  })
+  return successResMsg(res, 200, 'Pickup Date Set Successfully');
 
   } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: error.message
-    })
+    return errorResMsg(res, 500, error.message);
   }
 }
