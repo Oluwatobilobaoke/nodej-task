@@ -8,7 +8,6 @@ const { successResMsg, errorResMsg } = require('./utils/response');
 const app = express();
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
 
 app.use(cors());
 
