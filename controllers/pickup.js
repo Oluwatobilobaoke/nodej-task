@@ -4,7 +4,6 @@ const { successResMsg, errorResMsg } = require('../utils/response');
 
 function getDayOfWeek(date) {
   const dayOfWeek = new Date(date).getDay();    
-  console.log({dayOfWeek});
   return isNaN(dayOfWeek) ? null : 
     ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][dayOfWeek];
 }
@@ -16,7 +15,6 @@ function convertToReadableDate(date) {
 
 function getFutureDates(date, occurrence) {
   let datesArray = [];
-  // console.log({daysInWeek});
 
   if (occurrence == 1) {
     let dates = moment(date).add(7, 'days')
@@ -33,7 +31,6 @@ function getFutureDates(date, occurrence) {
 
   if (occurrence == 2) {
     for (let index = 1; index <= Number(occurrence); index++) {
-      console.log({index, occurrence});
       let dates = moment(date).add(index, 'weeks');
 
       const dateObject = {
@@ -49,7 +46,7 @@ function getFutureDates(date, occurrence) {
 
   if (occurrence == 4) {
     for (let index = 1; index <= Number(occurrence); index++) {
-      console.log({index, occurrence});
+
       let dates = moment(date).add(index, 'weeks');
 
       const dateObject = {
@@ -72,11 +69,8 @@ exports.setPickupDate = async (req, res) => {
 
     const {serviceRecurrence, pickupDate } = req.body;
 
-   console.log({serviceRecurrence, pickupDate});
 
     const pickupDay = getDayOfWeek(pickupDate);
-
-    console.log({pickupDay});
 
 
   if (pickupDay === null) {
